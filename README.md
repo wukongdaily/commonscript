@@ -7,7 +7,7 @@ This project is a universal script designed for OpenWrt. It can be used on both 
 
 ##  打开电脑系统终端,粘贴如下代码
 ```
-wget -O /tmp/common.run  https://ghproxy.com/https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/common.run && chmod +x /tmp/common.run  && /tmp/common.run
+wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/drive-common.sh && chmod +x /tmp/drive-common.sh  && /tmp/drive-common.sh
 
 ```
 
