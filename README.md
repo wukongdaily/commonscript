@@ -9,6 +9,7 @@ wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.
 
 
 ```
+##  适用机型如(x86_64 esir固件、R2S官方固件、Flippy的N1固件等)
 
 [查看Wiki 更多详细使用说明](https://github.com/wukongdaily/commonscript/wiki/How-to-use)
 ***
