@@ -35,10 +35,10 @@ is_kiddin9_os() {
 
 #设置时区、语言、主题
 set_lang_zone_argone(){
-	uci set system.@system[0].zonename='Asia/Shanghai'
-	uci set system.@system[0].timezone='CST-8'
-	uci commit system
-	/etc/init.d/system reload
+    uci set system.@system[0].zonename='Asia/Shanghai'
+    uci set system.@system[0].timezone='CST-8'
+    uci commit system
+    /etc/init.d/system reload
     #判断如果是supes的固件
     if is_kiddin9_os; then
     echo "this is the op.supes.top firmware,no need to argone theme"
@@ -46,11 +46,11 @@ set_lang_zone_argone(){
     ##设置Argone 紫色主题 并且 设置第三方软件源
     setup_software_source 1
     ## 这里安装的是argone 而非argon,防止和预装了argon主题的系统冲突。
-	opkg install luci-app-argone-config
-	uci set luci.main.mediaurlbase='/luci-static/argone'
+    opkg install luci-app-argone-config
+    uci set luci.main.mediaurlbase='/luci-static/argone'
     # 默认设置为简体中文
-	uci set luci.main.lang='zh_cn'
-	uci commit
+    uci set luci.main.lang='zh_cn'
+    uci commit
     fi
 }
 
@@ -69,29 +69,29 @@ install_istore() {
     if is_iStoreOS; then
         echo "您的系统本来就是iStoreOS,已经内置iStore应用商店"
     else
-	echo "准备安装iStore应用商店相关argone主题...."
-    set_lang_zone_argone
-    #这里采用离线包ipk的方式，主要是因为体积小速度快。
-    #引用软件源的方式反而需要opkg update
-    #而iStore的版本无需担心，因为在安装装机必备时会升级iStore版本,并且用户也可以手动升级
-    cd /tmp
-	wget https://istore.linkease.com/repo/all/store/taskd_1.0.3-1_all.ipk
-	wget https://istore.linkease.com/repo/all/store/luci-lib-xterm_4.18.0_all.ipk
-	wget https://istore.linkease.com/repo/all/store/luci-lib-taskd_1.0.18_all.ipk
-	wget https://istore.linkease.com/repo/all/store/luci-app-store_0.1.14-1_all.ipk
-	opkg install taskd_1.0.3-1_all.ipk
-	opkg install luci-lib-xterm_4.18.0_all.ipk
-	opkg install luci-lib-taskd_1.0.18_all.ipk
-	opkg install luci-app-store_0.1.14-1_all.ipk
-    # --force-depends 这是为了N1 可以顺利安装上首页风格
-	opkg install luci-app-quickstart --force-depends
-	setup_software_source 0
-	is-opkg update
-    #为了首页的完整性,这里要安装易有云的本地文件管理器
-	is-opkg install app-meta-linkease
-    #为了首页的风格完全和iStoreOS一致,这里修改了名称
-	uci set system.@system[0].hostname='iStoreOS'
-	/etc/init.d/system reload
+        echo "准备安装iStore应用商店相关argone主题...."
+        set_lang_zone_argone
+        #这里采用离线包ipk的方式，主要是因为体积小速度快。
+        #引用软件源的方式反而需要opkg update
+        #而iStore的版本无需担心，因为在安装装机必备时会升级iStore版本,并且用户也可以手动升级
+    	cd /tmp
+    	wget https://istore.linkease.com/repo/all/store/taskd_1.0.3-1_all.ipk
+    	wget https://istore.linkease.com/repo/all/store/luci-lib-xterm_4.18.0_all.ipk
+    	wget https://istore.linkease.com/repo/all/store/luci-lib-taskd_1.0.18_all.ipk
+    	wget https://istore.linkease.com/repo/all/store/luci-app-store_0.1.14-1_all.ipk
+    	opkg install taskd_1.0.3-1_all.ipk
+    	opkg install luci-lib-xterm_4.18.0_all.ipk
+    	opkg install luci-lib-taskd_1.0.18_all.ipk
+    	opkg install luci-app-store_0.1.14-1_all.ipk
+    	# --force-depends 这是为了N1 可以顺利安装上首页风格
+    	opkg install luci-app-quickstart --force-depends
+    	setup_software_source 0
+    	is-opkg update
+    	#为了首页的完整性,这里要安装易有云的本地文件管理器
+    	is-opkg install app-meta-linkease
+    	#为了首页的风格完全和iStoreOS一致,这里修改了名称
+    	uci set system.@system[0].hostname='iStoreOS'
+    	/etc/init.d/system reload
     fi
 }
 
