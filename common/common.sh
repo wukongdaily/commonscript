@@ -91,11 +91,11 @@ install_istore() {
         #为了首页的风格完全和iStoreOS一致,这里修改了名称
         uci set system.@system[0].hostname='iStoreOS'
         /etc/init.d/system reload
-        # 若安装了iStore商店则在概览中追加iStore字样
-        extra_info="with iStore"
+        # 若已安装iStore商店则在概览中追加iStore字样
+        extra_info="with iStoreOS Style"
         current_revision=$(grep "DISTRIB_REVISION" /etc/openwrt_release | cut -d "'" -f 2)
         new_revision="${current_revision} ${extra_info}"
-        sed -i "s/DISTRIB_REVISION='$current_revision'/DISTRIB_REVISION='$new_revision'/" /etc/openwrt_release
+        sed -i "s/DISTRIB_REVISION=.*$/DISTRIB_REVISION='$new_revision'/" /etc/openwrt_release
     fi
 }
 
