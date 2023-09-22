@@ -13,8 +13,9 @@ wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.
 
 [查看Wiki 更多详细使用说明](https://github.com/wukongdaily/commonscript/wiki/How-to-use)
 ***
-
-![](https://github.com/wukongdaily/commonscript/blob/master/common/N1.jpg?raw=true)
+[![GitHub](https://img.shields.io/github/license/wukongdaily/commonscript?label=LICENSE&logo=github&logoColor=%20)](https://github.com/wukongdaily/commonscript/blob/master/LICENSE)
+![GitHub Stars](https://img.shields.io/github/stars/wukongdaily/commonscript.svg?style=flat&logo=appveyor&label=Stars&logo=github)
+![GitHub Forks](https://img.shields.io/github/forks/wukongdaily/commonscript.svg?style=flat&logo=appveyor&label=Forks&logo=github)
 
 ***
 
