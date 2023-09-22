@@ -18,11 +18,6 @@ wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.
 
 ***
 
-# Refers to
-https://github.com/wukongdaily/allinonescript<br>
-https://github.com/megastep/makeself
 
-# 便携路由器 GL-iNet MT-3000/MT2500
-https://github.com/wukongdaily/gl-inet-onescript
 
 
