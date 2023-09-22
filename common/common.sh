@@ -34,7 +34,7 @@ is_kiddin9_os() {
 }
 
 #设置时区、语言、主题
-set_lang_zone_argon(){
+set_lang_zone_argone(){
 	uci set system.@system[0].zonename='Asia/Shanghai'
 	uci set system.@system[0].timezone='CST-8'
 	uci commit system
@@ -66,11 +66,11 @@ is_x86_64_router() {
 
 ## 安装应用商店
 install_istore() {
-	if is_iStoreOS; then
-    echo "您的系统本来就是iStoreOS,已经内置iStore应用商店"
+    if is_iStoreOS; then
+        echo "您的系统本来就是iStoreOS,已经内置iStore应用商店"
     else
 	echo "准备安装iStore应用商店相关argone主题...."
-    set_lang_zone_argo
+    set_lang_zone_argone
     #这里采用离线包ipk的方式，主要是因为体积小速度快。
     #引用软件源的方式反而需要opkg update
     #而iStore的版本无需担心，因为在安装装机必备时会升级iStore版本,并且用户也可以手动升级
@@ -343,7 +343,7 @@ remove_check_signature_option() {
 ## 添加opkg签名
 add_check_signature_option() {
     local opkg_conf="/etc/opkg.conf"
-	echo "option check_signature 1" >> "$opkg_conf"
+    echo "option check_signature 1" >> "$opkg_conf"
 }
 
 #********************************************************
@@ -394,7 +394,7 @@ show_user_tips(){
 
 while true; do
     clear
-	add_author_info
+    add_author_info
     echo "***********************************************************************"
     echo "*      软路由通用工具箱(for Openwrt) v1.0        "
     echo "*      自动识别CPU架构 x86_64/Arm 均可使用         "
@@ -419,64 +419,64 @@ while true; do
             #安装iStore和首页风格
             echo
             install_istore
-			show_user_tips
+	    show_user_tips
             ;;
         2)
-			#解决安卓原生TV首次连不上wifi的问题
+	    #解决安卓原生TV首次连不上wifi的问题
             add_dhcp_domain
-			show_user_tips
+	    show_user_tips
             ;;
         3)
             #添加emotn域名防止弹框
             add_emotn_domain
-			show_user_tips
+	    show_user_tips
             ;;
         4)
             echo
-			#软路由WAN口可访问后台网页
+	    #软路由WAN口可访问后台网页
             set_firewall_wan_open
-			show_user_tips
+	    show_user_tips
             ;;
         5)
             echo
-			#设置wan口可访问终端ttyd
+	    #设置wan口可访问终端ttyd
             set_ttyd_wan_enble
-			show_user_tips
+	    show_user_tips
             ;;
         6)
             echo
-			#查看当前WAN口IP地址
+	    #查看当前WAN口IP地址
             show_all_interface
-			show_user_tips
+	    show_user_tips
             ;;
         7)
             echo
-			#安装系统必备插件
+	    #安装系统必备插件
             set_system_kits
-			show_user_tips
+	    show_user_tips
             ;;
-		8)
+	8)
             echo
-			#安装WireGuard
+	    #安装WireGuard
             install_wireguard
-			show_user_tips
+	    show_user_tips
             show_reboot_tips
             ;;
-		9)
+	9)
             echo
-			#安装adguardhome
+	    #安装adguardhome
             install_adguardhome
 			show_user_tips
             ;;
         [Nn])
-			# 切换到下一页
+	     # 切换到下一页
             if [ $current_page -lt $total_pages ]; then
                 current_page=$((current_page + 1))
             else
                 echo
                 echo "已经是最后一页了。"
-				echo
-				show_user_tips
+		echo
+		show_user_tips
             fi
             ;;
         [Bb])
@@ -486,22 +486,22 @@ while true; do
             else
                 echo
                 echo "已经是第一页了。"
-				echo
-				show_user_tips
+		echo
+		show_user_tips
             fi
             ;;
         [Qq])
             echo
-			echo "您已退出,欢迎下次再来"
+	    echo "您已退出,欢迎下次再来"
             exit 0
             ;;
         [Rr])
             echo
-			show_reboot_tips
+	    show_reboot_tips
             ;;
         [Pp])
             echo
-			show_poweroff_tips
+	    show_poweroff_tips
             ;;
         *)
             echo "无效选项，请重新选择。"
