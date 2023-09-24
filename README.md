@@ -25,6 +25,12 @@ wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.
 * aarch64_generic平台的OpenWrt(phicomm-n1 | Other Amlogic etc)
 
 
+# 鸣谢
+* https://github.com/kenzok78/luci-theme-argone
+* https://op.dllkids.xyz/packages/
+* https://github.com/linkease/istore
+* Other Project
+
 
 
 
