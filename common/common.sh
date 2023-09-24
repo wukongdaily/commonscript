@@ -436,10 +436,8 @@ while true; do
     3)
         #卸载argon主题
         echo
-        opkg remove luci-app-argone-config
-        opkg remove luci-theme-argone
-        opkg remove luci-app-argon-config
-        opkg remove luci-theme-argon
+        opkg remove luci-theme-argone --force-removal-of-dependent-packages
+        opkg remove luci-theme-argon --force-removal-of-dependent-packages
         ;;
     4)
         #解决安卓原生TV首次连不上wifi的问题
