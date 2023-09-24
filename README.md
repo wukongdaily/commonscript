@@ -1,8 +1,14 @@
 # commonscript
-This project is a universal script designed for OpenWrt. It can be used on both Arm and x86 platforms.<br>
-主要的功能围绕让非iStoreOS固件的软路由一键轻松换上iStore商店及其首页风格,至于其他功能会根据观众反馈来迭代开发。
+[![GitHub](https://img.shields.io/github/license/wukongdaily/commonscript.svg?label=LICENSE&logo=github&logoColor=%20)](https://github.com/wukongdaily/commonscript/blob/master/LICENSE)
+![GitHub Stars](https://img.shields.io/github/stars/wukongdaily/commonscript.svg?style=flat&logo=appveyor&label=Stars&logo=github)
+![GitHub Forks](https://img.shields.io/github/forks/wukongdaily/commonscript.svg?style=flat&logo=appveyor&label=Forks&logo=github)
 
-##  打开电脑系统终端,粘贴如下代码
+The main function of this project is to convert OpenWrt style to iStoreOS style.
+***
+<img alt="Static Badge" src="https://img.shields.io/badge/OpenWrt-01181B?logoColor=0DE7E7&label=Style&labelColor=0EE23B"> 🔄  <img alt="Static Badge" src="https://img.shields.io/badge/iStoreOS-8A2BE2?logoColor=0DE7E7&label=Style&labelColor=0EE23B">
+
+
+##  打开电脑系统终端,连接ssh,粘贴如下代码
  ![Static Badge](https://img.shields.io/badge/all%20in%20one%20script-8A2BE2?logo=black&logoColor=black&label=%E7%BB%88%E7%AB%AF)
 ```
 wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/drive-common.sh && chmod +x /tmp/drive-common.sh  && /tmp/drive-common.sh
@@ -12,12 +18,13 @@ wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.
 
 
 [查看Wiki 更多详细使用说明](https://github.com/wukongdaily/commonscript/wiki/%E8%AF%B4%E6%98%8E)
-***
-[![GitHub](https://img.shields.io/github/license/wukongdaily/commonscript.svg?label=LICENSE&logo=github&logoColor=%20)](https://github.com/wukongdaily/commonscript/blob/master/LICENSE)
-![GitHub Stars](https://img.shields.io/github/stars/wukongdaily/commonscript.svg?style=flat&logo=appveyor&label=Stars&logo=github)
-![GitHub Forks](https://img.shields.io/github/forks/wukongdaily/commonscript.svg?style=flat&logo=appveyor&label=Forks&logo=github)
 
-***
+# 适用范围
+* x86_64的OpenWrt(eSir-GDQ etc)
+* aarch64_cortex-a53平台的OpenWrt(R2S、R4S etc)
+* aarch64_generic平台的OpenWrt(phicomm-n1 | Other Amlogic etc)
+
+
 
 
 
