@@ -4,6 +4,27 @@
 # 比如R2S官方FriendlyELEC固件集成了大量的USB无线网卡驱动,用到无线发射ap的小伙伴就可以用这个脚本来丰富官方固件的功能，又保留了无线网卡驱动。
 # 它是一个简单的调试工具 是锦上添花的东西，并非大而全的工具。并且这套脚本不安装敏感插件。
 
+# 全局变量来标记是否已经执行一次性操作
+executed_once=0
+# 定义只执行一次的操作
+execute_once() {
+    if [ $executed_once -eq 0 ]; then
+        add_author_info
+        remove_some_not_found_source
+        executed_once=1
+    else
+        # echo "show menu again...."
+    fi
+}
+
+# 删除系统里的无效源
+remove_some_not_found_source() {
+    # 删除Flippy N1固件里的无效源404
+    sed -i '/src\/gz openwrt_core https:\/\/mirrors.cloud.tencent.com\/lede\/snapshots\/targets\/armvirt\/64\/packages/d' /etc/opkg/distfeeds.conf
+    # 删除FriendlyWrt系统里的无效的本地路径引用
+    sed -i '/src\/gz friendlywrt_packages file:\/\/opt\/packages/d' /etc/opkg/distfeeds.conf
+}
+
 #设置wan口可访问webui,这一步是为了方便软路由连接wan口一根网线的时候，调试方便，
 #如果你为了绝对安全，你可以在:网络——防火墙 将wan口设置为拒绝
 set_firewall_wan_open() {
@@ -44,7 +65,7 @@ set_lang_zone_argone() {
     else
         ##设置Argone 紫色主题 并且 设置第三方软件源
         setup_software_source 1
-        
+
         opkg install luci-app-${skin}-config
         uci set luci.main.mediaurlbase='/luci-static/'${skin}
         # 默认设置为简体中文
@@ -90,12 +111,20 @@ install_istore() {
         is-opkg install app-meta-linkease
         #为了首页的风格完全和iStoreOS一致,这里修改了名称
         uci set system.@system[0].hostname='iStoreOS'
+        uci commit system
         /etc/init.d/system reload
         # 若已安装iStore商店则在概览中追加iStore字样
-        extra_info="with iStoreOS Style"
-        current_revision=$(grep "DISTRIB_REVISION" /etc/openwrt_release | cut -d "'" -f 2)
-        new_revision="${current_revision} ${extra_info}"
-        sed -i "s/DISTRIB_REVISION=.*$/DISTRIB_REVISION='$new_revision'/" /etc/openwrt_release
+        if is_x86_64_router; then
+            extra_info="with iStoreOS Style"
+            current_revision=$(grep "DISTRIB_REVISION" /etc/openwrt_release | cut -d "'" -f 2)
+            new_revision="${current_revision} ${extra_info}"
+            sed -i "s/DISTRIB_REVISION=.*$/DISTRIB_REVISION='$new_revision'/" /etc/openwrt_release
+        else
+            if ! grep -q " like iStoreOS" /tmp/sysinfo/model; then
+                sed -i '1s/$/ like iStoreOS/' /tmp/sysinfo/model
+            fi
+        fi
+
     fi
 }
 
@@ -398,7 +427,7 @@ show_user_tips() {
 
 while true; do
     clear
-    add_author_info
+    execute_once
     echo "***********************************************************************"
     echo "*      软路由通用工具箱(for Openwrt) v1.0        "
     echo "*      自动识别CPU架构 x86_64/Arm 均可使用         "
@@ -430,8 +459,6 @@ while true; do
         #安装iStore和首页风格(R2S-FriendlyWrt)
         echo
         skin="argon"
-        #delete R2S opkg local path
-        sed -i '/src\/gz friendlywrt_packages file:\/\/opt\/packages/d' /etc/opkg/distfeeds.conf
         install_istore
         show_user_tips
         ;;
