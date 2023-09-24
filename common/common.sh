@@ -44,9 +44,9 @@ set_lang_zone_argone() {
     else
         ##设置Argone 紫色主题 并且 设置第三方软件源
         setup_software_source 1
-        ## 这里安装的是argone 而非argon,防止和预装了argon主题的系统冲突。
-        opkg install luci-app-argone-config
-        uci set luci.main.mediaurlbase='/luci-static/argone'
+        
+        opkg install luci-app-${skin}-config
+        uci set luci.main.mediaurlbase='/luci-static/'${skin}
         # 默认设置为简体中文
         uci set luci.main.lang='zh_cn'
         uci commit
@@ -347,15 +347,19 @@ add_check_signature_option() {
     echo "option check_signature 1" >>"$opkg_conf"
 }
 
+skin="Argone"
+
 #********************************************************
 
 # 分页大小，表示每页显示的菜单选项数量
-PAGE_SIZE=7
+PAGE_SIZE=9
 # 当前页数
 current_page=1
 # 菜单选项数组
 menu_options=(
-    "安装iStore应用商店及首页风格"
+    "一键安装iStore风格化(x86、N1)"
+    "一键安装iStore风格化(R2S)"
+    "一键卸载Argon主题"
     "添加主机名映射(解决安卓原生TV首次连不上wifi的问题)"
     "添加Emotn Store域名(解决打开emotn弹框问题)"
     "设置软路由WAN口可访问WebUI"
@@ -416,53 +420,67 @@ while true; do
     case $choice in
 
     1)
-        #安装iStore和首页风格
+        #安装iStore和首页风格(x86、N1)
         echo
+        skin="argone"
         install_istore
         show_user_tips
         ;;
     2)
+        #安装iStore和首页风格(R2S)
+        echo
+        skin="argon"
+        install_istore
+        show_user_tips
+        ;;
+    3)
+        #卸载argon主题
+        echo
+        opkg remove luci-app-argone-config
+        opkg remove luci-app-argon-config
+        ;;
+    4)
         #解决安卓原生TV首次连不上wifi的问题
         add_dhcp_domain
         show_user_tips
         ;;
-    3)
+    5)
         #添加emotn域名防止弹框
         add_emotn_domain
         show_user_tips
         ;;
-    4)
+    6)
         echo
         #软路由WAN口可访问后台网页
         set_firewall_wan_open
         show_user_tips
         ;;
-    5)
+    7)
         echo
         #设置wan口可访问终端ttyd
         set_ttyd_wan_enble
         show_user_tips
         ;;
-    6)
+    8)
         echo
         #查看当前WAN口IP地址
         show_all_interface
         show_user_tips
         ;;
-    7)
+    9)
         echo
         #安装系统必备插件
         set_system_kits
         show_user_tips
         ;;
-    8)
+    10)
         echo
         #安装WireGuard
         install_wireguard
         show_user_tips
         show_reboot_tips
         ;;
-    9)
+    11)
         echo
         #安装adguardhome
         install_adguardhome
