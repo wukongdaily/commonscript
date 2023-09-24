@@ -357,8 +357,8 @@ PAGE_SIZE=9
 current_page=1
 # 菜单选项数组
 menu_options=(
-    "一键安装iStore风格化(x86、N1)"
-    "一键安装iStore风格化(R2S)"
+    "一键安装iStoreOS风格化(x86、N1)"
+    "一键安装iStoreOS风格化(FriendlyWrt)"
     "一键卸载Argon主题"
     "添加主机名映射(解决安卓原生TV首次连不上wifi的问题)"
     "添加Emotn Store域名(解决打开emotn弹框问题)"
@@ -427,9 +427,11 @@ while true; do
         show_user_tips
         ;;
     2)
-        #安装iStore和首页风格(R2S)
+        #安装iStore和首页风格(R2S-FriendlyWrt)
         echo
         skin="argon"
+        #delete R2S opkg local path
+        sed -i '/src\/gz friendlywrt_packages file:\/\/opt\/packages/d' /etc/opkg/distfeeds.conf
         install_istore
         show_user_tips
         ;;
