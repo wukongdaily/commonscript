@@ -31,6 +31,11 @@ wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.
 * https://github.com/linkease/istore
 * Other Project
 
+# 其他通用Script
+* <img alt="Static Badge" src="https://img.shields.io/badge/MT3000-E70D0D?style=for-the-badge&label=MT2500A&labelColor=8A2BE2">
+* GL-iNet Router
+* https://github.com/wukongdaily/gl-inet-onescript
+
 
 
 
