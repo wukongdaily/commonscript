@@ -115,8 +115,11 @@ install_istore() {
         if is_x86_64_router; then
             extra_info="with iStoreOS Style"
             current_revision=$(grep "DISTRIB_REVISION" /etc/openwrt_release | cut -d "'" -f 2)
-            new_revision="${current_revision} ${extra_info}"
-            sed -i "s/DISTRIB_REVISION=.*$/DISTRIB_REVISION='$new_revision'/" /etc/openwrt_release
+            # 检查是否已包含extra_info
+            if [[ $current_revision != *"$extra_info"* ]]; then
+                new_revision="${current_revision} ${extra_info}"
+                sed -i "s/DISTRIB_REVISION=.*$/DISTRIB_REVISION='$new_revision'/" /etc/openwrt_release
+            fi
         else
             if ! grep -q " like iStoreOS" /tmp/sysinfo/model; then
                 sed -i '1s/$/ like iStoreOS/' /tmp/sysinfo/model
@@ -494,7 +497,7 @@ while true; do
         [ -f "/usr/lib/lua/luci/controller/argone-config.lua" ] && rm "/usr/lib/lua/luci/controller/argone-config.lua"
         show_user_tips
         ;;
-        
+
     4)
         #解决安卓原生TV首次连不上wifi的问题
         add_dhcp_domain
