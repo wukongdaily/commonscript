@@ -467,7 +467,7 @@ while true; do
     1)
         #安装iStore和首页风格(x86、N1)
         if is_FriendlyWrt; then
-            echo "您应该选择选项2"
+            echo "您应该选择 选项2,按Enter键后,请重新选择 选项2"
         else
             skin="argone"
             install_istore
@@ -477,7 +477,7 @@ while true; do
     2)
         #安装iStore和首页风格(R2S-FriendlyWrt)
         if is_x86_64_router || is_Phicomm_N1; then
-            echo "您应该选择选项1"
+            echo "您应该选择选项1,按Enter键后,请重新选择 选项1"
         else
             skin="argon"
             install_istore
