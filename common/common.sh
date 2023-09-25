@@ -471,8 +471,8 @@ while true; do
         else
             skin="argone"
             install_istore
-            show_user_tips
         fi
+        show_user_tips
         ;;
     2)
         #安装iStore和首页风格(R2S-FriendlyWrt)
@@ -481,8 +481,8 @@ while true; do
         else
             skin="argon"
             install_istore
-            show_user_tips
         fi
+        show_user_tips
         ;;
     3)
         #卸载argon主题
@@ -492,7 +492,9 @@ while true; do
         opkg remove luci-app-argone-config
         opkg remove luci-app-argon-config
         [ -f "/usr/lib/lua/luci/controller/argone-config.lua" ] && rm "/usr/lib/lua/luci/controller/argone-config.lua"
+        show_user_tips
         ;;
+        
     4)
         #解决安卓原生TV首次连不上wifi的问题
         add_dhcp_domain
