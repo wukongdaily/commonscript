@@ -20,7 +20,7 @@ wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.
 [查看Wiki 更多详细使用说明](https://github.com/wukongdaily/commonscript/wiki/%E8%AF%B4%E6%98%8E)
 
 # 适用范围
-* x86_64的OpenWrt(eSir-GDQ etc)
+* x86_64的OpenWrt(eSir-GDQ etc)(UI上可以了，但是还存在诸多bug需要解决 建议等等)
 * aarch64_cortex-a53平台的OpenWrt(R2S、R4S etc)
 * aarch64_generic平台的OpenWrt(phicomm-n1 | Other Amlogic etc)
 
