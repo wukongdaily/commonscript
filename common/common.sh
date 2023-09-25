@@ -12,8 +12,6 @@ execute_once() {
         add_author_info
         remove_some_not_found_source
         executed_once=1
-    else
-        # echo "show menu again...."
     fi
 }
 
