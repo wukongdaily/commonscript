@@ -24,6 +24,7 @@ wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.
 * aarch64_cortex-a53平台的OpenWrt(R2S、R4S etc)
 * aarch64_generic平台的OpenWrt(phicomm-n1 | Other Amlogic etc)
 * 360T7路由
+* 树莓派4b 选择 选项1
 
 
 # 鸣谢
