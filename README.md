@@ -23,6 +23,7 @@ wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.
 * x86_64的OpenWrt(eSir-GDQ etc)(UI上可以了，但是还存在诸多bug需要解决 建议等等)
 * aarch64_cortex-a53平台的OpenWrt(R2S、R4S etc)
 * aarch64_generic平台的OpenWrt(phicomm-n1 | Other Amlogic etc)
+* 360T7路由
 
 
 # 鸣谢
