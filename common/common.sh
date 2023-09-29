@@ -87,44 +87,69 @@ install_istore() {
     if is_iStoreOS; then
         echo "您的系统本来就是iStoreOS,已经内置iStore应用商店"
     else
-        echo "准备安装iStore应用商店相关argone主题...."
-        set_lang_zone_argone
+        echo "正在安装iStore应用商店...."
         #这里采用离线包ipk的方式，主要是因为体积小速度快。
         #引用软件源的方式反而需要opkg update
         #而iStore的版本无需担心，因为在安装装机必备时会升级iStore版本,并且用户也可以手动升级
-        cd /tmp
-        wget https://istore.linkease.com/repo/all/store/taskd_1.0.3-1_all.ipk
-        wget https://istore.linkease.com/repo/all/store/luci-lib-xterm_4.18.0_all.ipk
-        wget https://istore.linkease.com/repo/all/store/luci-lib-taskd_1.0.18_all.ipk
-        wget https://istore.linkease.com/repo/all/store/luci-app-store_0.1.14-1_all.ipk
-        opkg install taskd_1.0.3-1_all.ipk
-        opkg install luci-lib-xterm_4.18.0_all.ipk
-        opkg install luci-lib-taskd_1.0.18_all.ipk
-        opkg install luci-app-store_0.1.14-1_all.ipk
+        URLS=(
+            "https://istore.linkease.com/repo/all/store/taskd_1.0.3-1_all.ipk"
+            "https://istore.linkease.com/repo/all/store/luci-lib-xterm_4.18.0_all.ipk"
+            "https://istore.linkease.com/repo/all/store/luci-lib-taskd_1.0.18_all.ipk"
+            "https://istore.linkease.com/repo/all/store/luci-app-store_0.1.14-1_all.ipk"
+        )
+        # Directory to store the downloaded files
+        DOWNLOAD_DIR="/tmp"
+        # Install iStore ipks
+        install_ipk() {
+            local ipk_file="$1"
+            opkg install "$ipk_file"
+        }
+        # Download and install the IPK files
+        for url in "${URLS[@]}"; do
+            filename=$(basename "$url")
+            download_path="$DOWNLOAD_DIR/$filename"
+            # Check if the file exists and is not empty
+            if [ -e "$download_path" ] && [ -s "$download_path" ]; then
+                echo "File $filename exists and is not empty. Skipping download."
+            else
+                echo "Downloading $filename..."
+                wget "$url" -P "$DOWNLOAD_DIR"
+            fi
+            # Install the IPK file
+            install_ipk "$download_path"
+        done
+        #设置主题（包含设置第三方软件源 setup_software_source 1）
+        set_lang_zone_argone
         # --force-depends 这是为了N1 可以顺利安装上首页风格
         opkg install luci-app-quickstart --force-depends
-        setup_software_source 0
-        is-opkg update
-        #为了首页的完整性,这里要安装易有云的本地文件管理器
-        is-opkg install app-meta-linkease
-        #为了首页的风格完全和iStoreOS一致,这里修改了名称
-        uci set system.@system[0].hostname='iStoreOS'
-        uci commit system
-        /etc/init.d/system reload
-        # 若已安装iStore商店则在概览中追加iStore字样
-        if is_x86_64_router; then
-            extra_info="with iStoreOS Style"
-            current_revision=$(grep "DISTRIB_REVISION" /etc/openwrt_release | cut -d "'" -f 2)
-            # 检查是否已包含extra_info
-            if [[ $current_revision != *"$extra_info"* ]]; then
-                new_revision="${current_revision} ${extra_info}"
-                sed -i "s/DISTRIB_REVISION=.*$/DISTRIB_REVISION='$new_revision'/" /etc/openwrt_release
+        #如果首页安装成功
+        if opkg list-installed | grep -q "luci-app-quickstart"; then
+            #为了首页的完整性,这里要安装易有云的本地文件管理器
+            sh -c "$(wget --no-check-certificate -qO- http://fw.koolcenter.com/binary/LinkEase/Openwrt/install_linkease.sh)"
+            #为了首页的风格完全和iStoreOS一致,这里修改了名称
+            uci set system.@system[0].hostname='iStoreOS'
+            uci commit system
+            /etc/init.d/system reload
+            # 若已安装iStore商店则在概览中追加iStore字样
+            if is_x86_64_router; then
+                extra_info="with iStoreOS Style"
+                current_revision=$(grep "DISTRIB_REVISION" /etc/openwrt_release | cut -d "'" -f 2)
+                # 检查是否已包含extra_info
+                if [[ $current_revision != *"$extra_info"* ]]; then
+                    new_revision="${current_revision} ${extra_info}"
+                    sed -i "s/DISTRIB_REVISION=.*$/DISTRIB_REVISION='$new_revision'/" /etc/openwrt_release
+                fi
+            else
+                if ! grep -q " like iStoreOS" /tmp/sysinfo/model; then
+                    sed -i '1s/$/ like iStoreOS/' /tmp/sysinfo/model
+                fi
             fi
         else
-            if ! grep -q " like iStoreOS" /tmp/sysinfo/model; then
-                sed -i '1s/$/ like iStoreOS/' /tmp/sysinfo/model
-            fi
+            echo "首页安装失败,要不你换个新版本固件试试?"
+            cat /etc/openwrt_release
         fi
+        #还原软件源
+        setup_software_source 0
 
     fi
 }
@@ -227,14 +252,20 @@ set_system_kits() {
         echo "正在安装iStore应用商店...."
         install_istore
     fi
-    echo "正在使用iStore商店安装必备系统工具...."
-    #升级iStore应用商店
-    is-opkg do_self_upgrade
-    # 安装 关机、ddns内网穿透、系统便利工具、定时设置
-    is-opkg install 'app-meta-poweroff'
-    is-opkg install 'app-meta-ddnsto'
-    is-opkg install 'app-meta-systools'
-    is-opkg install 'app-meta-autotimeset'
+    if opkg list-installed | grep -q "luci-app-store"; then
+        echo "正在使用iStore商店安装必备系统工具...."
+        #升级iStore应用商店
+        is-opkg do_self_upgrade
+        # 安装 关机、ddns内网穿透、系统便利工具、定时设置
+        is-opkg install 'app-meta-poweroff'
+        is-opkg install 'app-meta-ddnsto'
+        is-opkg install 'app-meta-systools'
+        is-opkg install 'app-meta-autotimeset'
+    else
+        echo "应用商店没有安装成功,不兼容适配,要不换一个新版固件吧!"
+        cat /etc/openwrt_release
+    fi
+
 }
 
 #添加shell出处
