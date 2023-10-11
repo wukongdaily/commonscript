@@ -95,7 +95,7 @@ install_istore() {
             "https://istore.linkease.com/repo/all/store/taskd_1.0.3-1_all.ipk"
             "https://istore.linkease.com/repo/all/store/luci-lib-xterm_4.18.0_all.ipk"
             "https://istore.linkease.com/repo/all/store/luci-lib-taskd_1.0.18_all.ipk"
-            "https://istore.linkease.com/repo/all/store/luci-app-store_0.1.14-1_all.ipk"
+            "https://istore.linkease.com/repo/all/store/luci-app-store_0.1.14-2_all.ipk"
         )
         # Directory to store the downloaded files
         DOWNLOAD_DIR="/tmp"
