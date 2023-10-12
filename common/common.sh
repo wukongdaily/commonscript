@@ -19,6 +19,8 @@ execute_once() {
 remove_some_not_found_source() {
     # 删除Flippy N1固件里的无效源404
     sed -i '/src\/gz openwrt_core https:\/\/mirrors.cloud.tencent.com\/lede\/snapshots\/targets\/armvirt\/64\/packages/d' /etc/opkg/distfeeds.conf
+    sed -i '/src\/gz openwrt_small https:\/\/mirrors.cloud.tencent.com\/lede\/snapshots\/packages\/aarch64_generic\/small/d' /etc/opkg/distfeeds.conf
+    sed -i '/src\/gz openwrt_kenzo https:\/\/mirrors.cloud.tencent.com\/lede\/snapshots\/packages\/aarch64_generic\/kenzo/d' /etc/opkg/distfeeds.conf
     # 删除FriendlyWrt系统里的无效的本地路径引用
     sed -i '/src\/gz friendlywrt_packages file:\/\/opt\/packages/d' /etc/opkg/distfeeds.conf
 }
@@ -88,39 +90,13 @@ install_istore() {
         echo "您的系统本来就是iStoreOS,已经内置iStore应用商店"
     else
         echo "正在安装iStore应用商店...."
-        #这里采用离线包ipk的方式，主要是因为体积小速度快。
-        #引用软件源的方式反而需要opkg update
-        #而iStore的版本无需担心，因为在安装装机必备时会升级iStore版本,并且用户也可以手动升级
-        URLS=(
-            "https://istore.linkease.com/repo/all/store/taskd_1.0.3-1_all.ipk"
-            "https://istore.linkease.com/repo/all/store/luci-lib-xterm_4.18.0_all.ipk"
-            "https://istore.linkease.com/repo/all/store/luci-lib-taskd_1.0.18_all.ipk"
-            "https://istore.linkease.com/repo/all/store/luci-app-store_0.1.14-2_all.ipk"
-        )
-        # Directory to store the downloaded files
-        DOWNLOAD_DIR="/tmp"
-        # Install iStore ipks
-        install_ipk() {
-            local ipk_file="$1"
-            opkg install "$ipk_file"
-        }
-        # Download and install the IPK files
-        for url in "${URLS[@]}"; do
-            filename=$(basename "$url")
-            download_path="$DOWNLOAD_DIR/$filename"
-            # Check if the file exists and is not empty
-            if [ -e "$download_path" ] && [ -s "$download_path" ]; then
-                echo "File $filename exists and is not empty. Skipping download."
-            else
-                echo "Downloading $filename..."
-                wget "$url" -P "$DOWNLOAD_DIR"
-            fi
-            # Install the IPK file
-            install_ipk "$download_path"
-        done
         #设置主题（包含设置第三方软件源 setup_software_source 1）
         set_lang_zone_argone
-        # --force-depends 这是为了N1 可以顺利安装上首页风格
+        #Fix N1 安装不了luci-app-store的问题
+        opkg remove git-lfs
+        #根据软件源安装
+        opkg install luci-app-store
+        opkg install quickstart
         opkg install luci-app-quickstart --force-depends
         #如果首页安装成功
         if opkg list-installed | grep -q "luci-app-quickstart"; then
@@ -154,13 +130,14 @@ install_istore() {
     fi
 }
 
-# 判断OpenWrt系统的架构并设置不同的软件源
+# 判断OpenWrt系统的ARM架构并设置不同的软件源
 set_packages_by_arch() {
     # 获取返回结果的总行数
     local total_lines=$(opkg print-architecture | wc -l)
     local architecture=""
     local source="https://op.dllkids.xyz/packages/"
-
+    #先清空追加iStore软件源
+    echo "src/gz is_store https://istore.linkease.com/repo/all/store" >/etc/opkg/customfeeds.conf
     if [ "$total_lines" -eq 4 ]; then
         # 如果总行数为四行，则提取第四行的架构信息
         architecture=$(opkg print-architecture | awk 'NR==4{print $2}')
@@ -190,6 +167,8 @@ setup_software_source() {
         remove_check_signature_option
         # 检查是否是x86_64路由器
         if is_x86_64_router; then
+            #清空后添加
+            echo "src/gz is_store https://istore.linkease.com/repo/all/store" >/etc/opkg/customfeeds.conf
             echo "src/gz dllkids https://op.dllkids.xyz/packages/x86_64" >>/etc/opkg/customfeeds.conf
         else
             # 根据架构设置arm的软件源
