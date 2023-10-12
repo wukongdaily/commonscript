@@ -8,7 +8,7 @@ The main function of this project is to convert OpenWrt style to iStoreOS style.
 <img alt="Static Badge" src="https://img.shields.io/badge/OpenWrt-01181B?logoColor=0DE7E7&label=Style&labelColor=0EE23B"> 🔄  <img alt="Static Badge" src="https://img.shields.io/badge/iStoreOS-8A2BE2?logoColor=0DE7E7&label=Style&labelColor=0EE23B">
 
 
-##  打开电脑系统终端,连接ssh,粘贴如下代码
+##  打开电脑系统终端,连接ssh,粘贴如下代码,风格化之后,最好是退出网页,再从新登录一次
  ![Static Badge](https://img.shields.io/badge/all%20in%20one%20script-8A2BE2?logo=black&logoColor=black&label=%E7%BB%88%E7%AB%AF)
 ```
 wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/drive-common.sh && chmod +x /tmp/drive-common.sh  && /tmp/drive-common.sh
