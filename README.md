@@ -20,6 +20,7 @@ wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.
 ```
 wget -O /tmp/reinstall_istore.sh  https://ghproxy.com/https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/reinstall_istore.sh && chmod +x /tmp/reinstall_istore.sh  && /tmp/reinstall_istore.sh
 
+
 ```
 
 
@@ -27,7 +28,8 @@ wget -O /tmp/reinstall_istore.sh  https://ghproxy.com/https://raw.githubusercont
 
 ## 单独安装文件管理器
 ```
-sh -c "$(wget --no-check-certificate -qO- http://fw.koolcenter.com/binary/LinkEase/Openwrt/install_linkease.sh)"
+wget -O /tmp/reinstall_istore.sh  https://ghproxy.com/https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/reinstall_istore.sh && chmod +x /tmp/reinstall_istore.sh  && /tmp/reinstall_istore.sh
+/tmp/is-opkg install app-meta-linkease
 
 ```
 
