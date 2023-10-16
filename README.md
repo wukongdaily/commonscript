@@ -3,10 +3,14 @@
 ![GitHub Stars](https://img.shields.io/github/stars/wukongdaily/commonscript.svg?style=flat&logo=appveyor&label=Stars&logo=github)
 ![GitHub Forks](https://img.shields.io/github/forks/wukongdaily/commonscript.svg?style=flat&logo=appveyor&label=Forks&logo=github)
 
+
+
 The main function of this project is to convert OpenWrt style to iStoreOS style.
 ***
 <img alt="Static Badge" src="https://img.shields.io/badge/OpenWrt-01181B?logoColor=0DE7E7&label=Style&labelColor=0EE23B"> 🔄  <img alt="Static Badge" src="https://img.shields.io/badge/iStoreOS-8A2BE2?logoColor=0DE7E7&label=Style&labelColor=0EE23B">
 
+# 提示：如何使用ssh ？参考如下图文
+https://github.com/wukongdaily/HowToUseSSH
 
 ##  打开电脑系统终端,连接ssh,粘贴如下代码,风格化之后,最好是退出网页,再从新登录一次
  ![Static Badge](https://img.shields.io/badge/all%20in%20one%20script-8A2BE2?logo=black&logoColor=black&label=%E7%BB%88%E7%AB%AF)
