@@ -20,15 +20,11 @@ wget -O /tmp/drive-common.sh  https://ghproxy.com/https://raw.githubusercontent.
 
 ```
 
-## 单独只安装一个iStore
-```
-wget -O /tmp/reinstall_istore.sh  https://ghproxy.com/https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/reinstall_istore.sh && chmod +x /tmp/reinstall_istore.sh  && /tmp/reinstall_istore.sh
+## 使用u盘方式安装istore商店
+[使用U盘方式安装](https://telegra.ph/install-istore-for-mt3000-11-03)
 
 
-```
 
-
-[查看Wiki 更多详细使用说明](https://github.com/wukongdaily/commonscript/wiki/%E8%AF%B4%E6%98%8E)
 
 ## 单独安装文件管理器
 ```
