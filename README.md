@@ -24,8 +24,11 @@ wget -O /tmp/drive-common.sh  https://raw.githubusercontent.com/wukongdaily/comm
 [使用U盘方式安装](https://telegra.ph/install-istore-for-mt3000-11-03)
 
 
+## 单独安装iStore商店
+```
+wget -O /tmp/reinstall_istore.sh  https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/reinstall_istore.sh && chmod +x /tmp/reinstall_istore.sh  && /tmp/reinstall_istore.sh
 
-
+```
 ## 单独安装文件管理器
 ```
 wget -O /tmp/reinstall_istore.sh  https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/reinstall_istore.sh && chmod +x /tmp/reinstall_istore.sh  && /tmp/reinstall_istore.sh
