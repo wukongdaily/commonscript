@@ -8,4 +8,4 @@ check_bash_installed() {
   fi
 }
 check_bash_installed
-wget -O /tmp/common.sh  https://ghproxy.com/https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/common.sh && chmod +x /tmp/common.sh  && /tmp/common.sh
+wget -O /tmp/common.sh  https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/common.sh && chmod +x /tmp/common.sh  && /tmp/common.sh
