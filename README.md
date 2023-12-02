@@ -15,7 +15,7 @@ https://github.com/wukongdaily/HowToUseSSH
 ##  打开电脑系统终端,连接ssh,粘贴如下代码,风格化之后,最好是退出网页,再从新登录一次
  ![Static Badge](https://img.shields.io/badge/all%20in%20one%20script-8A2BE2?logo=black&logoColor=black&label=%E7%BB%88%E7%AB%AF)
 ```
-wget -O /tmp/drive-common.sh  https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/drive-common.sh && chmod +x /tmp/drive-common.sh  && /tmp/drive-common.sh
+wget -O /tmp/drive-common.sh https://cdn.jsdelivr.net/gh/wukongdaily/commonscript/common/drive-common.sh && chmod +x /tmp/drive-common.sh  && /tmp/drive-common.sh
 
 
 ```
