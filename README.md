@@ -26,12 +26,12 @@ wget -O /tmp/drive-common.sh https://cdn.jsdelivr.net/gh/wukongdaily/commonscrip
 
 ## 单独安装iStore商店
 ```
-wget -O /tmp/reinstall_istore.sh  https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/reinstall_istore.sh && chmod +x /tmp/reinstall_istore.sh  && /tmp/reinstall_istore.sh
+wget -O /tmp/reinstall_istore.sh https://cdn.jsdelivr.net/gh/wukongdaily/commonscript/common/reinstall_istore.sh && chmod +x /tmp/reinstall_istore.sh  && /tmp/reinstall_istore.sh
 
 ```
 ## 单独安装文件管理器
 ```
-wget -O /tmp/reinstall_istore.sh  https://raw.githubusercontent.com/wukongdaily/commonscript/master/common/reinstall_istore.sh && chmod +x /tmp/reinstall_istore.sh  && /tmp/reinstall_istore.sh
+wget -O /tmp/reinstall_istore.sh https://cdn.jsdelivr.net/gh/wukongdaily/commonscript/common/reinstall_istore.sh && chmod +x /tmp/reinstall_istore.sh  && /tmp/reinstall_istore.sh
 /tmp/is-opkg install app-meta-linkease
 
 ```
