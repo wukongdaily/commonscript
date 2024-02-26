@@ -19,6 +19,12 @@ wget -O /tmp/drive-common.sh https://cdn.jsdelivr.net/gh/wukongdaily/commonscrip
 
 
 ```
+# 国内
+```
+wget -O /tmp/drive-common.sh https://gitee.com/wukongdaily/commonscript/raw/master/common/common.sh && chmod +x /tmp/drive-common.sh  && /tmp/drive-common.sh
+
+
+```
 
 ## 使用u盘方式安装istore商店
 [使用U盘方式安装](https://telegra.ph/install-istore-for-mt3000-11-03)
