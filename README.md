@@ -21,7 +21,7 @@ wget -O /tmp/drive-common.sh https://cdn.jsdelivr.net/gh/wukongdaily/commonscrip
 ```
 # 国内
 ```
-wget -O /tmp/drive-common.sh https://gitee.com/wukongdaily/commonscript/raw/master/common/common.sh && chmod +x /tmp/drive-common.sh  && /tmp/drive-common.sh
+wget -O /tmp/drive-common.sh https://gitee.com/wukongdaily/commonscript/raw/master/common/drive-common.sh && chmod +x /tmp/drive-common.sh  && /tmp/drive-common.sh
 
 
 ```
