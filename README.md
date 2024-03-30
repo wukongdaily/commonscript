@@ -11,6 +11,8 @@ The main function of this project is to convert OpenWrt style to iStoreOS style.
 
 # 提示：如何使用ssh ？参考如下图文
 https://github.com/wukongdaily/HowToUseSSH
+# 提示：斐讯N1 已经有iStoreOS固件了 
+https://www.bilibili.com/video/BV1sm421E72A
 
 ##  打开电脑系统终端,连接ssh,粘贴如下代码,风格化之后,最好是退出网页,再从新登录一次
  ![Static Badge](https://img.shields.io/badge/all%20in%20one%20script-8A2BE2?logo=black&logoColor=black&label=%E7%BB%88%E7%AB%AF)
